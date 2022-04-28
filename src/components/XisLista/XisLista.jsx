@@ -17,7 +17,14 @@ function XisLista() {
   return (
     <div className="XisLista">
       {xis.map((xis, index) => (
-        <XisListaItem key={`XisListaItem-${index}`}/>
+        <XisListaItem 
+        key={`XisListaItem-${index}`}
+        xis={xis}
+        quantidadeSelecionada={xisSelecionado[index]}
+        index={index}
+        onRemove={index => removerItem(index)}
+        onAdd={ index => adicionarItem(index)}
+        />
       ))}
     </div>
   );

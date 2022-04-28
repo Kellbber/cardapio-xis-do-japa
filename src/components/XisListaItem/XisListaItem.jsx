@@ -1,35 +1,22 @@
 import "./XisListaItem.css";
 
-function XisListaItem() {
-    const removerItem = (i) => console.log('remover'+i);
-    const adicionarItem = (i) => console.log('adicionar'+i);
-    const xisSelecionado = [0];
-    const index = 0
-    const xis ={
-        titulo: "Açai com Leite Condenado",
-        descricao: "Batman usa calcinha",
-        foto: require("assets/images/acai-com-leite-condensado.png"),
-        preco: 10.0,
-        sabor: "Açai",
-        recheio: "Leite Condenado",
-        possuiRecheio: true,
-    };
-    
+function XisListaItem({ xis, quantidadeSelecionada, index, onRemove, onAdd }) {
+
 
   const badgeCounter = (canRender, index) =>
     Boolean(canRender) && (
-      <span className="XisListaItem__badge"> {xisSelecionado[index]} </span>
+      <span className="XisListaItem__badge"> {quantidadeSelecionada} </span>
     );
 
   const removeButton = (canRender, index) =>
     Boolean(canRender) && (
-      <button className="Acoes__remover" onClick={() => removerItem(index)}>
+      <button className="Acoes__remover" onClick={() => onRemove(index)}>
         REMOVER
       </button>
     );
   return (
     <div className="XisListaItem ">
-      {badgeCounter(xisSelecionado[index], index)}
+      {badgeCounter(quantidadeSelecionada, index)}
       <div>
         <div className="XisListaItem__titulo">{xis.titulo}</div>
         <div className="XisListaItem__preco">{xis.preco.toFixed(2)}</div>
@@ -37,13 +24,13 @@ function XisListaItem() {
         <div className="XisListaItem__acoes Acoes">
           <button
             className={`Acoes__adicionar ${
-              !xisSelecionado[index] && "Acoes__adicionar--preencher"
+              !quantidadeSelecionada && "Acoes__adicionar--preencher"
             }`}
-            onClick={() => adicionarItem(index)}
+            onClick={() => onAdd(index)}
           >
             ADICIONAR
           </button>
-          {removeButton(xisSelecionado[index], index)}
+          {removeButton(quantidadeSelecionada, index)}
         </div>
       </div>
       <img
