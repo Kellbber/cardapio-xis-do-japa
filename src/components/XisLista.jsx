@@ -3,7 +3,7 @@ import {xis} from "../mocks/xis.js";
 function XisLista (){
     return <div className="XisLista">
         {xis.map((xis, index) => (
-        <div className="XisListaItem">
+        <div className="XisListaItem " key={`XisListaItem-${index}`}>
             <div>
                 <div className="XisListaItem__titulo">{xis.titulo}</div>
                 <div className="XisListaItem__preco">{xis.preco.toFixed(2)}</div>
