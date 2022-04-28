@@ -1,6 +1,6 @@
-import XisLista from "./XisLista";
-import sacola from "../assets/icons/sacola.svg";
-import logo from "../assets/logo.svg";
+import XisLista from "components/XisLista/XisLista";
+import sacola from "assets/icons/sacola.svg";
+import logo from "assets/logo.svg";
 
 import "./Home.css";
 function Home() {
