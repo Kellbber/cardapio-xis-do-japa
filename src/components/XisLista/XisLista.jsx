@@ -12,10 +12,12 @@ function XisLista() {
     const response = await XisService.getLista();
     setXis(response);
   };
+  // nunca coloque um estado que está sendo alterado dentro do useEffect como dependencia!!
   useEffect(() => {
+    
     getLista();
   }, []);
-
+console.log(xis)
   return (
     <div className="XisLista">
       {xis.map((xis, index) => (
