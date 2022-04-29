@@ -1,36 +1,30 @@
 import "./XisListaItem.css";
+import {useState} from "react";
 
-function XisListaItem({ xis, quantidadeSelecionada, index, onRemove, onAdd }) {
+function XisListaItem({ xis}) {
+  const [quantidade, setQuantidade] = useState(0);
 
 
-  const badgeCounter = (canRender, index) =>
-    Boolean(canRender) && (
-      <span className="XisListaItem__badge"> {quantidadeSelecionada} </span>
-    );
-
-  const removeButton = (canRender, index) =>
-    Boolean(canRender) && (
-      <button className="Acoes__remover" onClick={() => onRemove(index)}>
-        REMOVER
-      </button>
-    );
+  function addQuantidade() {
+    setQuantidade(quantidade+1)
+  }
+  function removeQuantidade() {
+    setQuantidade(quantidade-1)
+  }
+  
   return (
     <div className="XisListaItem ">
-      {badgeCounter(quantidadeSelecionada, index)}
+
+
+      {quantidade>0 && <span className="XisListaItem__badge"> {quantidade} </span>}
       <div>
         <div className="XisListaItem__titulo">{xis.titulo}</div>
         <div className="XisListaItem__preco">{xis.preco.toFixed(2)}</div>
         <div className="XisListaItem__descricao">{xis.descricao}</div>
         <div className="XisListaItem__acoes Acoes">
-          <button
-            className={`Acoes__adicionar ${
-              !quantidadeSelecionada && "Acoes__adicionar--preencher"
-            }`}
-            onClick={() => onAdd(index)}
-          >
-            ADICIONAR
-          </button>
-          {removeButton(quantidadeSelecionada, index)}
+      
+          <button onClick={addQuantidade} className={quantidade==0 ? "Acoes__adicionar" : "Acoes__adicionar Acoes__adicionar--preencher"}>ADICIONAR</button>
+          {quantidade>0 && <button className="Acoes__remover" onClick={removeQuantidade}>REMOVER</button> }
         </div>
       </div>
       <img

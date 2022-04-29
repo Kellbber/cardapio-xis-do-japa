@@ -1,11 +1,23 @@
 import { Api } from "helpers/Api";
 
 const parseResponse = (response) => response.json();
-
+const transformXis = (xis) => {
+    const sabor = xis.sabor;
+  
+    return {
+      ...xis,
+      id: xis._id,
+      titulo: xis.sabor,
+      sabor,
+    };
+  };
+  
+  const parseTransformLista = (response) =>
+    parseResponse(response).then((xis) => xis.map(transformXis));
 
 export const XisService = {
     getLista: () =>
-    fetch(Api.xisLista(),{method: "GET"}).then(parseResponse),
+    fetch(Api.xisLista(),{method: "GET"}).then(parseTransformLista),
 
     getById: (id) =>
     fetch(Api.xisById(id), {method: "GET"}).then(parseResponse),
