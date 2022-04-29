@@ -1,10 +1,10 @@
 const XisContext = {
     xisEndpoint: () => `${Api.baseUrl}/xis`,
-    xisLista: () => `${XisContext.paletaEndpoint()}/all-xis`,
-    xisById: (id) => `${XisContext.paletaEndpoint()}/one-xis/${id}`,
-    createXis: () => `${XisContext.paletaEndpoint()}/create-xis`,
-    updateXisById: (id) => `${XisContext.paletaEndpoint()}/update-xis/${id}`,
-    deleteXisById: (id) => `${XisContext.paletaEndpoint()}/delete-xis/${id}`,
+    xisLista: () => `${XisContext.xisEndpoint()}/all-xis`,
+    xisById: (id) => `${XisContext.xisEndpoint()}/one-xis/${id}`,
+    createXis: () => `${XisContext.xisEndpoint()}/create-xis`,
+    updateXisById: (id) => `${XisContext.xisEndpoint()}/update-xis/${id}`,
+    deleteXisById: (id) => `${XisContext.xisEndpoint()}/delete-xis/${id}`,
   };
   
   export const Api = {
