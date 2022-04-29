@@ -1,9 +1,12 @@
 import "./XisListaItem.css";
 import {useState} from "react";
 
+import XisDetalhesModal from "components/XisDetalhesModal/XisDetalhesModal";
+
 function XisListaItem({ xis}) {
   const [quantidade, setQuantidade] = useState(0);
 
+  const [xisModal, setXisModal] = useState(false);
 
   function addQuantidade() {
     setQuantidade(quantidade+1)

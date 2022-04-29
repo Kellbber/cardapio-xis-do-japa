@@ -3,7 +3,10 @@ import XisListaItem from "components/XisListaItem/XisListaItem";
 
 import { XisService } from "services/XisService";
 
+
+
 import "./XisLista.css";
+import XisDetalhesModal from "components/XisDetalhesModal/XisDetalhesModal";
 
 function XisLista() {
   const [xis, setXis] = useState([]);
@@ -12,6 +15,8 @@ function XisLista() {
     const response = await XisService.getLista();
     setXis(response);
   };
+
+  const [xisModal, setXisModal] = useState(false);
   // nunca coloque um estado que está sendo alterado dentro do useEffect como dependencia!!
   useEffect(() => {
     
@@ -29,6 +34,9 @@ console.log(xis)
 
         />
       ))}
+
+      {xisModal && <XisDetalhesModal xis={xisModal} closeModal={()=>setXisModal(false)}/>}
+      
     </div>
   );
 }
