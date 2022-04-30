@@ -8,11 +8,17 @@ import Modal from "react-modal";
 
 import XisDetalhesModal from "components/XisDetalhesModal/XisDetalhesModal";
 
+import {XisService} from "services/XisService";
+
 function XisListaItem({ xis }) {
   const [quantidade, setQuantidade] = useState(0);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const getXisById = async (xisId) => {
+    const response = await XisService.getById(xisId);
+    setModalIsOpen(response);
+  };
   const customStyles = {
     content: {
       backgroundColor: 'transparent'
@@ -101,7 +107,7 @@ function XisListaItem({ xis }) {
                 +
               </button>
               <div className="Modal__body">
-                <XisDetalhesModal xis={xis} />
+                <XisDetalhesModal xis={xis} getXisById={xis.id} />
               </div>
             </div>
             </div>
