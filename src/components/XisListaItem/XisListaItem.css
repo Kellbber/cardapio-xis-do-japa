@@ -7,6 +7,9 @@
     display: flex;
     justify-content: space-around;
     position: relative;
+    cursor: pointer;
+    border: none;
+    
   }
   
   @media (max-width: 400px) {
@@ -51,9 +54,10 @@
     max-width: 280px;
     text-align: center;
     font-weight: 700;
+    font-size: 0.8rem;
     text-transform: uppercase;
     cursor: pointer;
-    width: 48%;
+    width: 58%;
   }
   
   .Acoes__remover {
@@ -61,7 +65,7 @@
   }
   
   .Acoes__adicionar {
-    background-color: darkviolet;
+    background-color: rgb(40, 119, 9);
   }
   
   .Acoes__adicionar--preencher {
@@ -69,7 +73,7 @@
   }
   
   .XisListaItem__foto {
-    height: 150px;
+    height: 120px;
     margin-right: -60px;
   }
 
@@ -88,4 +92,11 @@
   border-radius: 50%;
   top: -9px;
   left: -9px;
+}
+
+.closeModalButton{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  
 }

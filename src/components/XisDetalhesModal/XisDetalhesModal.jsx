@@ -1,9 +1,13 @@
 import "./XisDetalhesModal.css";
-import Modal from "components/Modal/Modal";
 
-function XisDetalhesModal(xis, closeModal) {
+
+
+function XisDetalhesModal({xis}) {
+
+console.log(xis)
+
   return (
-    <Modal closeModal={closeModal}>
+ 
       <div className="XisDetalhesModal">
         <div>
           <div className="XisDetalhesModal__titulo">{xis.titulo}</div>
@@ -11,9 +15,9 @@ function XisDetalhesModal(xis, closeModal) {
           <div className="XisDetalhesModal__descricao"><b>Sabor: {xis.sabor}</b></div>
           <div className="XisDetalhesModal__descricao"><b>Descrição: {xis.descricao}</b></div>
         </div>
-        <img src={xis.foto} alt={`${xis.sabor}`} className="XisDetalhesModal__foto" />
+        <img src={xis.foto} alt={xis.sabor} className="XisDetalhesModal__foto" />
       </div>
-    </Modal>
+   
   );
 }
 

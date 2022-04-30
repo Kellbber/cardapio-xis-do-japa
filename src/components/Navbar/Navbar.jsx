@@ -1,7 +1,7 @@
 import "./Navbar.css"
 
-import sacola from "assets/icons/sacola.svg";
-import logo from "assets/logo.svg";
+import sacola from "assets/icons/sacola.png";
+import logo from "assets/logo.jpg";
 
 function Navbar(){
     return (
@@ -10,11 +10,11 @@ function Navbar(){
           <div className="Header__logo Logo">
             <img
               src={logo}
-              width="70px"
-              alt="Logo El Geladon"
+              width="65px"
+              alt="Logo Xis do Japa"
               className="Logo__icone"
             />
-            <span className="Logo__titulo"> El Geladon </span>
+            <span className="Logo__titulo"> Xis do Japa </span>
           </div>
           <div className="Header__opcoes Opcoes">
             <div className="Opcoes__sacola Sacola">
