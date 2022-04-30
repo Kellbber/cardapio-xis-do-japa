@@ -2,8 +2,8 @@
     position: relative;
     background-image: radial-gradient(
       farthest-corner at 40px 40px,
-      #f77e7e 60%,
-      rgba(235, 18, 18, 0.5) 100%
+      #c94242 60%,
+      rgba(235, 44, 44, 0.5) 100%
     );
     min-height: calc(100vh - 60px);
     margin: 15px;
@@ -13,16 +13,16 @@
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
   }
 
-
-.Home__container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 350px) {
   .Home__container {
-    justify-content: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-}
+  
+  @media (max-width: 350px) {
+    .Home__container {
+      justify-content: unset;
+    }
+  }
 
+  

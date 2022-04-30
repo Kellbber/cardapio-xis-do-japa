@@ -1,4 +1,4 @@
-export const xis = [
+export const paletas = [
     {
       titulo: "Açaí com Leite Condensado",
       descricao:

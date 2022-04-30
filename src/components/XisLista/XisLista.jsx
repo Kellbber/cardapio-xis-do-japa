@@ -1,43 +1,58 @@
 import React, { useState, useEffect } from "react";
-
 import XisListaItem from "components/XisListaItem/XisListaItem";
-
 import { XisService } from "services/XisService";
 
+import XisDetalhesModal from "components/XisDetalhesModal/XisDetalhesModal";
 
 
 import "./XisLista.css";
+
 
 function XisLista() {
 
   const [xis, setXis] = useState([]);
 
+  const [xisSelecionado, setXisSelecionado] = useState({});
 
+  const [xisModal, setXisModal] = useState(false);
+  
 
-  const getLista = async () => {
-    const response = await XisService.getLista();
-    setXis(response);
+  const adicionarItem = (xisIndex) => {
+    const xis = {
+      [xisIndex]: Number(xisSelecionado[xisIndex] || 0) + 1};
+    setXisSelecionado({...xisSelecionado, ...xis});
   };
 
+  const removerItem = (xisIndex) => {
+    const xis = { [xisIndex]: Number(xisSelecionado[xisIndex] || 0) -1 }
+    setXisSelecionado({...xisSelecionado, ...xis});
+}
 
+const getLista = async ()=>{
+  const response = await XisService.getLista();
+  setXis(response);
+}
+const getXisById = async (xisId)=>{
+  const response = await XisService.getById(xisId);
+  setXisModal(response);
+}
 
-  // nunca coloque um estado que está sendo alterado dentro do useEffect como dependencia!!
-  useEffect(() => {
-    getLista();
-  }, []);
-
+useEffect(()=>{
+  getLista();
+},[]);
   return (
     <div className="XisLista">
       {xis.map((xis, index) => (
-        <XisListaItem
-          
+          <XisListaItem 
           key={`XisListaItem-${index}`}
           xis={xis}
+          quantidadeSelecionada={xisSelecionado[index]}
           index={index}
-
-        />
+          onRemove={index =>removerItem(index)}
+          onAdd={index => adicionarItem(index)}
+          clickItem={(xisId)=>getXisById(xisId)}/>
       ))}
-  
+      {xisModal && <XisDetalhesModal xis={xisModal} closeModal={()=> setXisModal(false)} />}
     </div>
   );
 }

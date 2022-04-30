@@ -4,7 +4,7 @@
     min-height: 200px;
     max-width: 700px;
     max-height: 450px;
-    background: rgba(235, 18, 18, 0.5) 100%;
+    background: #aa4242;
     position: relative;
     border-radius: 10px;
     box-sizing: border-box;
@@ -17,7 +17,7 @@
     width: 30px;
     height: 30px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     top: 20px;
     right: 20px;
@@ -49,5 +49,3 @@
       padding: 15px 70px 15px 15px;
     }
   }
-
-  

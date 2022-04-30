@@ -25,14 +25,13 @@
     left: 55px;
     font-family: "Exo";
     font-weight: 700;
-    font-size: 2.5em;
+    font-size: 2rem;
   }
   
   .Logo__icone {
     position: absolute;
-    left: -20px;
-    top: -15px;
-    border-radius: 20rem;
+    left: -4px;
+    top: -27px;
   }
   
   .Sacola {
@@ -82,6 +81,6 @@
     }
   
     .Logo__titulo {
-      font-size: 1.5em;
+      font-size: 0.9rem;
     }
   }
