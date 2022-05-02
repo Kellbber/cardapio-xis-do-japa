@@ -1,7 +1,8 @@
 import "./Navbar.css";
 import sacola from "assets/icons/sacola.png";
 import logo from "assets/logo.png";
-function Navbar() {
+import xis from "assets/icons/xis.svg"
+function Navbar(createXis) {
   return (
     <div className="Home__header Header">
       <div className="row">
@@ -15,6 +16,9 @@ function Navbar() {
           <span className="Logo__titulo"> Xis do Japa </span>
         </div>
         <div className="Header__opcoes Opcoes">
+          <button type="button" className="Opcoes__xis Xis" onClick={()=>createXis()}>
+            <img src={xis} width="40px" className="Xis__icone" alt="Adicionar Xis na lista" />
+          </button>
           <div className="Opcoes__sacola Sacola">
             <img
               src={sacola}

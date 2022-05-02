@@ -63,6 +63,11 @@
     .Header {
       max-width: 720px;
     }
+    .row {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+    }
   }
   
   @media (max-width: 840px) {
@@ -79,8 +84,24 @@
     .row {
       column-gap: 20px;
     }
-  
+    .Logo {
+      width: 100%;
+    }
     .Logo__titulo {
       font-size: 0.9rem;
     }
+
   }
+
+.Opcoes {
+  display: flex;
+}
+
+.Xis {
+  background: none;
+  border: none;
+}
+
+.Xis__icone {
+  cursor: pointer;
+}
