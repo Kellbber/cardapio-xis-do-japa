@@ -1,6 +1,6 @@
 import "./Home.css";
 import XisLista from "components/XisLista/XisLista";
-import AdicionaXisModal from "components/AdicionaXisModal/AdicionaXisModal";
+import AdicionaEditaXisModal from "components/AdicionaEditaXisModal/AdicionaEditaXisModal";
 import Navbar from "components/Navbar/Navbar";
 
 import { useState } from "react";
@@ -8,16 +8,19 @@ import { useState } from "react";
 function Home() {
   const [canShowAdicionaXisModal, setCanShowAdicionaXisModal] = useState(false);
 
+  const [xisParaAdicionar, setXisParaAdicionar] = useState();
+
   return (
     <div className="Home">
       <Navbar createXis={() => setCanShowAdicionaXisModal(true)} />
 
       <div className="Home__container">
-        <XisLista />
+        <XisLista xisCriado={xisParaAdicionar} />
 
         {canShowAdicionaXisModal && (
-          <AdicionaXisModal
+          <AdicionaEditaXisModal
             closeModal={() => setCanShowAdicionaXisModal(false)}
+            onCreateXis={(xis) => setXisParaAdicionar(xis)}
           />
         )}
       </div>

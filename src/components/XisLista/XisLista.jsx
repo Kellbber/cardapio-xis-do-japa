@@ -8,7 +8,7 @@ import XisDetalhesModal from "components/XisDetalhesModal/XisDetalhesModal";
 import "./XisLista.css";
 
 
-function XisLista() {
+function XisLista({xisCriado}) {
 
   const [xis, setXis] = useState([]);
 
@@ -36,6 +36,14 @@ const getXisById = async (xisId)=>{
   const response = await XisService.getById(xisId);
   setXisModal(response);
 }
+
+const adicionaXisNaLista = (xises) => {
+  const lista = [...xis, xises];
+  setXis(lista);
+};
+useEffect(() => {
+  if (xisCriado) adicionaXisNaLista(xisCriado);
+}, [xisCriado]);
 
 useEffect(()=>{
   getLista();

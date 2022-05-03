@@ -26,8 +26,9 @@ export const XisService = {
     fetch(Api.xisLista(), { method: "GET" }).then(parseTransformLista),
   getById: (id) =>
     fetch(Api.xisById(id), { method: "GET" }).then(parseTransformItem),
-  create: () =>
-    fetch(Api.createXis(), { method: "POST" }).then(parseResponse),
+    create: (xis) => fetch(Api.createXis(), { method: "POST", body: JSON.stringify(xis), mode: "cors", headers: {
+        "Content-Type": "application/json",
+    } }).then(parseTransformItem),
   updtateById: (id) =>
     fetch(Api.updateXisById(id), { method: "PUT" }).then(parseResponse),
   deleteById: (id) =>
