@@ -3,6 +3,8 @@ import XisLista from "components/XisLista/XisLista";
 import AdicionaEditaXisModal from "components/AdicionaEditaXisModal/AdicionaEditaXisModal";
 import Navbar from "components/Navbar/Navbar";
 
+import { ActionMode } from "constants/index";
+
 import { useState } from "react";
 
 function Home() {
@@ -10,9 +12,20 @@ function Home() {
 
   const [xisParaAdicionar, setXisParaAdicionar] = useState();
 
+  const [modoAtual, setModoAtual] = useState(ActionMode.NORMAL);
+
+  const handleActions = (action) => {
+    const novaAcao = modoAtual === action ? ActionMode.NORMAL : action;
+    setModoAtual(novaAcao);
+  };
+
   return (
     <div className="Home">
-      <Navbar createXis={() => setCanShowAdicionaXisModal(true)} />
+      <Navbar
+        mode={modoAtual}
+        createXis={() => setCanShowAdicionaXisModal(true)}
+        updateXis={() => handleActions(ActionMode.ATUALIZAR)}
+      />
 
       <div className="Home__container">
         <XisLista xisCriado={xisParaAdicionar} />

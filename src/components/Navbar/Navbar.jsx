@@ -1,9 +1,11 @@
+import { ActionMode } from "constants/index";
 import "./Navbar.css";
 import sacola from "assets/icons/sacola.png";
 import logo from "assets/logo.png";
 import xis from "assets/icons/xis.svg";
 import update from "assets/icons/update.svg";
-function Navbar({ createXis, updateXis }) {
+
+function Navbar({ createXis, updateXis, mode }) {
   return (
     <div className="Home__header Header">
       <div className="row">
@@ -19,7 +21,9 @@ function Navbar({ createXis, updateXis }) {
         <div className="Header__opcoes Opcoes">
           <button
             type="button"
-            className="Opcoes__xis Xis"
+            className={`Opcoes__xis Xis ${
+              mode === ActionMode.ATUALIZAR && "Xis--ativo"
+            }`}
             onClick={() => updateXis()}
           >
             <img

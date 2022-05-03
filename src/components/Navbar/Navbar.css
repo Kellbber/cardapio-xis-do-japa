@@ -100,8 +100,17 @@
 .Xis {
   background: none;
   border: none;
+  transform: translateY(-3px);
+  border-radius: 10px;
+  transition: all .5s;
+  padding: 0;
 }
 
 .Xis__icone {
   cursor: pointer;
+  transform: translateY(3px);
+}
+
+.Xis--ativo{
+  background: rgb(232, 230, 233);
 }
