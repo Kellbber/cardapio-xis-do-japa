@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
 import './AdicionaXisModal.css'
 function AdicionaXisModal({ closeModal }) {
@@ -15,6 +15,20 @@ function AdicionaXisModal({ closeModal }) {
         setState({ ...state, [name]: e.target.value, });
     };
 
+    const [canDisable, setCanDisable] = useState(true);
+
+    const canDisableSendButton = () =>{
+        const response = !Boolean(
+            state.descricao.length 
+            && state.foto.length
+            && state.sabor.length
+            && state.preco.length
+        )
+        setCanDisable(response)
+    }
+    useEffect(()=>{
+        canDisableSendButton();
+    })
     return (
         <Modal closeModal={closeModal}>
             <div className="AdicionaXisModal">
@@ -64,10 +78,9 @@ function AdicionaXisModal({ closeModal }) {
                             required />
                     </div>
 
-                    <input
+                    <button type="button" disabled={canDisable}
                         className="AdicionaXisModal__enviar"
-                        type="submit"
-                        value="Enviar" />
+                       >ENVIAR</button>
                 </form>
             </div>
         </Modal>
