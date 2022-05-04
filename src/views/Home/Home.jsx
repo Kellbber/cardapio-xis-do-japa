@@ -8,6 +8,8 @@ import { ActionMode } from "constants/index";
 import { useState } from "react";
 
 function Home() {
+  const [xisEditado, setXisEditado] = useState();
+
   const [canShowAdicionaXisModal, setCanShowAdicionaXisModal] = useState(false);
 
   const [xisParaAdicionar, setXisParaAdicionar] = useState();
@@ -23,6 +25,7 @@ function Home() {
 
   const [xisParaDeletar, setXisParaDeletar] = useState();
 
+  
   const handleDeleteXis = (xisToDelete) => {
     setXisParaDeletar(xisToDelete);
   }
@@ -37,6 +40,7 @@ function Home() {
     setXisParaAdicionar();
     setXisParaDeletar();
     setXisParaEditar();
+    setModoAtual(ActionMode.NORMAL);
   }
   return (
     <div className="Home">
@@ -51,7 +55,8 @@ function Home() {
          mode={modoAtual} 
         xisCriado={xisParaAdicionar}
         deleteXis={handleDeleteXis}
-        updateXis={handleUpdateXis} />
+        updateXis={handleUpdateXis}
+        xisEditado={xisEditado} />
 
         {canShowAdicionaXisModal && (
           <AdicionaEditaXisModal
@@ -59,6 +64,7 @@ function Home() {
             xisToUpdate={xisParaEditar}
             closeModal={handleCloseModal}
             onCreateXis={(xis) => setXisParaAdicionar(xis)}
+            onUpdateXis={(xis) => setXisEditado(xis)}
           />
         )}
       </div>

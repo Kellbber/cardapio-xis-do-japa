@@ -8,7 +8,7 @@ import "./XisLista.css";
 
 import { ActionMode } from "constants/index";
 
-function XisLista({ xisCriado, mode, updateXis, deleteXis }) {
+function XisLista({ xisCriado, mode, updateXis, deleteXis, xisEditado }) {
   
   const [xis, setXis] = useState([]);
 
@@ -46,7 +46,7 @@ function XisLista({ xisCriado, mode, updateXis, deleteXis }) {
 
   useEffect(() => {
     getLista();
-  }, []);
+  }, [xisEditado]);
 
   const adicionaXisNaLista = useCallback(
     (xises) => {
