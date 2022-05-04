@@ -1,66 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import XisListaItem from "components/XisListaItem/XisListaItem";
 import { XisService } from "services/XisService";
 
 import XisDetalhesModal from "components/XisDetalhesModal/XisDetalhesModal";
 
-
 import "./XisLista.css";
 
+import { ActionMode } from "constants/index";
 
-function XisLista({xisCriado}) {
-
+function XisLista({ xisCriado, mode, updateXis, deleteXis }) {
+  
   const [xis, setXis] = useState([]);
 
   const [xisSelecionado, setXisSelecionado] = useState({});
 
   const [xisModal, setXisModal] = useState(false);
-  
 
   const adicionarItem = (xisIndex) => {
     const xis = {
-      [xisIndex]: Number(xisSelecionado[xisIndex] || 0) + 1};
-    setXisSelecionado({...xisSelecionado, ...xis});
+      [xisIndex]: Number(xisSelecionado[xisIndex] || 0) + 1,
+    };
+    setXisSelecionado({ ...xisSelecionado, ...xis });
   };
 
   const removerItem = (xisIndex) => {
-    const xis = { [xisIndex]: Number(xisSelecionado[xisIndex] || 0) -1 }
-    setXisSelecionado({...xisSelecionado, ...xis});
-}
+    const xis = { [xisIndex]: Number(xisSelecionado[xisIndex] || 0) - 1 };
+    setXisSelecionado({ ...xisSelecionado, ...xis });
+  };
 
-const getLista = async ()=>{
-  const response = await XisService.getLista();
-  setXis(response);
-}
-const getXisById = async (xisId)=>{
-  const response = await XisService.getById(xisId);
-  setXisModal(response);
-}
+  const getLista = async () => {
+    const response = await XisService.getLista();
+    setXis(response);
+  };
+  const getXisById = async (xisId) => {
 
-const adicionaXisNaLista = (xises) => {
-  const lista = [...xis, xises];
-  setXis(lista);
-};
-useEffect(() => {
-  if (xisCriado) adicionaXisNaLista(xisCriado);
-}, [xisCriado]);
+    const response = await XisService.getById(xisId);
 
-useEffect(()=>{
-  getLista();
-},[]);
+    const mapper = {
+      [ActionMode.NORMAL]: () => setXisModal(response),
+      [ActionMode.ATUALIZAR]: () => updateXis(response),
+      [ActionMode.DELETAR]: () => deleteXis(response),
+    };
+    mapper[mode]();
+  };
+
+  useEffect(() => {
+    getLista();
+  }, []);
+
+  const adicionaXisNaLista = useCallback(
+    (xises) => {
+      const lista = [...xis, xises];
+      setXis(lista);
+    },
+    [xis]
+  );
+
+  useEffect(() => {
+    if (xisCriado && !xis.map(({ id }) => id).includes(xisCriado.id)) {
+      adicionaXisNaLista(xisCriado);
+    }
+  }, [adicionaXisNaLista, xisCriado, xis]);
+
   return (
     <div className="XisLista">
       {xis.map((xis, index) => (
-          <XisListaItem 
+        <XisListaItem
+          mode={mode}
           key={`XisListaItem-${index}`}
           xis={xis}
           quantidadeSelecionada={xisSelecionado[index]}
           index={index}
-          onRemove={index =>removerItem(index)}
-          onAdd={index => adicionarItem(index)}
-          clickItem={(xisId)=>getXisById(xisId)}/>
+          onRemove={(index) => removerItem(index)}
+          onAdd={(index) => adicionarItem(index)}
+          clickItem={(xisId) => getXisById(xisId)}
+        />
       ))}
-      {xisModal && <XisDetalhesModal xis={xisModal} closeModal={()=> setXisModal(false)} />}
+      {xisModal && (
+        <XisDetalhesModal
+          xis={xisModal}
+          closeModal={() => setXisModal(false)}
+        />
+      )}
     </div>
   );
 }

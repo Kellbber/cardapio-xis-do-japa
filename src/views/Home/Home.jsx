@@ -19,6 +19,25 @@ function Home() {
     setModoAtual(novaAcao);
   };
 
+  const [xisParaEditar, setXisParaEditar] = useState();
+
+  const [xisParaDeletar, setXisParaDeletar] = useState();
+
+  const handleDeleteXis = (xisToDelete) => {
+    setXisParaDeletar(xisToDelete);
+  }
+  
+  
+  const handleUpdateXis = (xisToUpdate) => {
+    setXisParaEditar(xisToUpdate);
+    setCanShowAdicionaXisModal(true);
+  }
+  const handleCloseModal = () => {
+    setCanShowAdicionaXisModal(false);
+    setXisParaAdicionar();
+    setXisParaDeletar();
+    setXisParaEditar();
+  }
   return (
     <div className="Home">
       <Navbar
@@ -28,11 +47,17 @@ function Home() {
       />
 
       <div className="Home__container">
-        <XisLista xisCriado={xisParaAdicionar} />
+        <XisLista
+         mode={modoAtual} 
+        xisCriado={xisParaAdicionar}
+        deleteXis={handleDeleteXis}
+        updateXis={handleUpdateXis} />
 
         {canShowAdicionaXisModal && (
           <AdicionaEditaXisModal
-            closeModal={() => setCanShowAdicionaXisModal(false)}
+             mode={modoAtual}
+            xisToUpdate={xisParaEditar}
+            closeModal={handleCloseModal}
             onCreateXis={(xis) => setXisParaAdicionar(xis)}
           />
         )}
