@@ -1,0 +1,39 @@
+.DeletaXisModal {
+    margin-top: -20px;
+  }
+  
+  .DeletaXisModal > div {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+  
+  .DeletaXisModal__foto {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    width: 80px;
+  }
+  
+  .DeletaXisModal__confirmar,
+  .DeletaXisModal__cancelar {
+    border: none;
+    border-radius: 5px;
+    font-family: "Exo", sans-serif;
+    padding: 5px;
+    max-width: 280px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 48%;
+    color: white;
+  }
+  
+  .DeletaXisModal__confirmar {
+    background-color: rgb(42, 90, 20);
+  }
+  
+  .DeletaXisModal__cancelar {
+    background-color: red;
+  }
