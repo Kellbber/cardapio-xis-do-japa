@@ -48,6 +48,7 @@ function Home() {
         mode={modoAtual}
         createXis={() => setCanShowAdicionaXisModal(true)}
         updateXis={() => handleActions(ActionMode.ATUALIZAR)}
+        deleteXis={() => handleActions(ActionMode.DELETAR)}
       />
 
       <div className="Home__container">

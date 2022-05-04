@@ -114,3 +114,7 @@
 .Xis--ativo{
   background: rgb(232, 230, 233);
 }
+
+.Xis--deletar {
+  background: rgb(233, 230, 230);
+}

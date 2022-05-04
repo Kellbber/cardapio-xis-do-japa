@@ -20,13 +20,14 @@ function XisListaItem({xis, quantidadeSelecionada, index, onRemove, onAdd, click
         {quantidadeSelecionada}{" "}
       </span>
     );
-
     const badgeAction = (canRender) => {
-      if (canRender) return (<span className="XisListaItem__tag"> { mode } </span>);
+      if (canRender) return (<span className={`XisListaItem__tag ${mode === ActionMode.DELETAR && 'XisListaItem__tag--deletar'}`}> { mode } </span>);
     }
   
   return (
-    <div className={`XisListaItem ${mode !== ActionMode.NORMAL && 'XisListaItem--disable'}`} onClick={()=>clickItem(xis.id)}>
+    <div className={`XisListaItem ${mode !== ActionMode.NORMAL && 'XisListaItem--disable'}
+    ${mode === ActionMode.DELETAR && 'XisListaItem--deletar'}`} 
+    onClick={()=>clickItem(xis.id)}>
       {badgeCounter(quantidadeSelecionada, index)}
       {badgeAction(mode !== ActionMode.NORMAL)}
       <div>

@@ -127,3 +127,11 @@
   top: -9px;
   left: -9px;
 }
+
+.XisListaItem--deletar {
+  box-shadow: 0px 0px 7px rgba(211, 0, 0);
+}
+
+.XisListaItem__tag--deletar {
+  background-color: red !important;
+}
