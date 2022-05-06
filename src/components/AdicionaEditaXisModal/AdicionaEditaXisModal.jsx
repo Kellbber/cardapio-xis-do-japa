@@ -3,12 +3,20 @@ import Modal from "components/Modal/Modal";
 import { XisService } from "services/XisService";
 import "./AdicionaEditaXisModal.css";
 
-function AdicionaEditaXisModal({ closeModal, onCreateXis }) {
+import { ActionMode } from "constants/index";
+
+function AdicionaEditaXisModal({
+  closeModal,
+  onCreateXis,
+  mode,
+  xisToUpdate,
+  onUpdateXis,
+}) {
   const form = {
-    preco: "",
-    sabor: "",
-    descricao: "",
-    foto: "",
+    preco: xisToUpdate?.preco ?? "",
+    sabor: xisToUpdate?.sabor ?? "",
+    descricao: xisToUpdate?.descricao ?? "",
+    foto: xisToUpdate?.foto ?? "",
   };
 
   const [state, setState] = useState(form);
@@ -24,38 +32,60 @@ function AdicionaEditaXisModal({ closeModal, onCreateXis }) {
       state.descricao.length &&
         state.foto.length &&
         state.sabor.length &&
-        state.preco.length
+        String(state.preco).length
     );
     setCanDisable(response);
   };
   useEffect(() => {
     canDisableSendButton();
-})
-  const createXis = async () => {
-
-    const renomeiaCaminhoFoto = (fotoPath) => fotoPath.split("\\").pop();
+  });
+  
+  const handleSend = async () => {
+    const renomeiaCaminhoFoto = (fotoPath) => fotoPath.split(/\\|\//).pop();
 
     const { sabor, descricao, preco, foto } = state;
 
     const xis = {
+      ...(xisToUpdate && { _id: xisToUpdate?.id }),
       sabor,
       descricao,
       preco,
       foto: `images/${renomeiaCaminhoFoto(foto)}`,
     };
 
-    const response = await XisService.create({
+    const serviceCall = {
+      [ActionMode.NORMAL]: () => XisService.create({
         ...xis,
-        preco: parseFloat(xis.preco)
-    });
-    onCreateXis(response)
+        preco: parseFloat(xis.preco)}),
+      [ActionMode.ATUALIZAR]: () => XisService.updtateById(xisToUpdate?.id, xis),
+    }
+
+    const response = await serviceCall[mode]();
+
+    const actionResponse = {
+      [ActionMode.NORMAL]: () => onCreateXis(response),
+      [ActionMode.ATUALIZAR]: () => onUpdateXis(response),
+    }
+
+    actionResponse[mode]();
+
+    const reset = {
+      preco: '',
+      sabor: '',
+      descricao: '',
+      foto: '',
+    }
+
+    setState(reset);
+
+ 
     closeModal();
   };
   return (
     <Modal closeModal={closeModal}>
       <div className="AdicionaXisModal">
         <form autoComplete="off">
-          <h2> Adicionar ao Cardápio </h2>
+        <h2> { ActionMode.ATUALIZAR === mode ? 'Atualizar' : 'Adicionar ao' } Cardápio </h2>
           <div>
             <label className="AdicionaXisModal__text" htmlFor="preco">
               {" "}
@@ -110,7 +140,6 @@ function AdicionaEditaXisModal({ closeModal, onCreateXis }) {
               id="foto"
               type="file"
               accept="image/png, image/gif, image/jpeg"
-              value={state.foto}
               onChange={(e) => handleChange(e, "foto")}
               required
             />
@@ -119,10 +148,10 @@ function AdicionaEditaXisModal({ closeModal, onCreateXis }) {
             className="AdicionaXisModal__enviar"
             type="button"
             disabled={canDisable}
-            onClick={createXis} >
-            Enviar
-            </button>
-
+            onClick={handleSend}
+          >
+            {ActionMode.NORMAL === mode ? 'ENVIAR' : 'ATUALIZAR'}
+          </button>
         </form>
       </div>
     </Modal>
