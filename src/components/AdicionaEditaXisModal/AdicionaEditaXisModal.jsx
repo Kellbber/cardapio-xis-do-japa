@@ -94,7 +94,7 @@ function AdicionaEditaXisModal({
             <input
               id="preco"
               placeholder="10,00"
-              type="text"
+              type="number"
               value={state.preco}
               onChange={(e) => handleChange(e, "preco")}
               required
